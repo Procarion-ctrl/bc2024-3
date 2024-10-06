@@ -3,6 +3,7 @@ const fs = require('fs');
 program
     .option('-i, --input <path>')
     .option('-o, --output <path>')
+    .option('-o2, --output2 <path>')
     .option('-d, --display');
 
 program.parse();
@@ -27,4 +28,9 @@ fs.readFile(options.input, 'utf8', (err, data) => {
             }
           });
         }
+        if (options.output2) {
+            for (let i of JSON.parse(data)){
+                fs.appendFileSync(options.output2, `${i.StockCode}-${i.ValCode}-${i.Attraction}\n`, 'utf8')
+            }
+          }
   });
